@@ -1,0 +1,11 @@
+{
+    "python.linting.pylintArgs": [
+    "--load-plugins=pylint_django",
+    "--django-settings-module=whereandwhen.settings",
+],
+    "workbench.colorCustomizations": {
+        "activityBar.background": "#412439",
+        "titleBar.activeBackground": "#5B334F",
+        "titleBar.activeForeground": "#FCF9FB"
+    }
+}
