@@ -10,4 +10,4 @@ from django.db import models
 class District(models.Model):
     """District class"""
     district_number = models.CharField(max_length=200)
-    rep_name = models.CharField(max_length=2)
+    rep_name = models.CharField(max_length=200)
