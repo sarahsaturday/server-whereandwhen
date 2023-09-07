@@ -1,0 +1,23 @@
+[
+    {
+        "model": "whereandwhenapi.type",
+        "pk": 1,
+        "fields": {
+            "type_name": "Zoom"
+        }
+    },
+    {
+        "model": "whereandwhenapi.type",
+        "pk": 2,
+        "fields": {
+            "type_name": "In-Person"
+        }
+    },
+    {
+        "model": "whereandwhenapi.type",
+        "pk": 3,
+        "fields": {
+            "type_name": "Hybrid"
+        }
+    }
+]
