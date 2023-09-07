@@ -1,0 +1,13 @@
+[
+    {
+        "model": "whereandwhenapi.area",
+        "pk": 1,
+        "fields": {
+            "area_number": "52",
+            "rep_first_name": "Irene",
+            "rep_last_name": "Irene",
+            "rep_phone": "123-456-7890",
+            "rep_email": "area@example.com"
+        }
+    }
+]

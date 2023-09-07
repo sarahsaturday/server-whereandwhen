@@ -1,0 +1,51 @@
+[
+    {
+        "model": "whereandwhenapi.day",
+        "pk": 1,
+        "fields": {
+            "day": "Monday"
+        }
+    },
+    {
+        "model": "whereandwhenapi.day",
+        "pk": 2,
+        "fields": {
+            "day": "Tuesday"
+        }
+    },
+    {
+        "model": "whereandwhenapi.day",
+        "pk": 3,
+        "fields": {
+            "day": "Wednesday"
+        }
+    },
+    {
+        "model": "whereandwhenapi.day",
+        "pk": 4,
+        "fields": {
+            "day": "Thursday"
+        }
+    },
+    {
+        "model": "whereandwhenapi.day",
+        "pk": 5,
+        "fields": {
+            "day": "Friday"
+        }
+    },
+    {
+        "model": "whereandwhenapi.day",
+        "pk": 6,
+        "fields": {
+            "day": "Saturday"
+        }
+    },
+    {
+        "model": "whereandwhenapi.day",
+        "pk": 7,
+        "fields": {
+            "day": "Sunday"
+        }
+    }
+]

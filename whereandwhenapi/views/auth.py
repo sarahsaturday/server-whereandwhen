@@ -6,7 +6,6 @@ from rest_framework import status
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
-from datetime import datetime
 from whereandwhenapi.models import GroupRep
 
 @api_view(['POST'])
@@ -30,6 +29,8 @@ def login_user(request):
         data = { 'valid': False }
         return Response(data)
 
+@api_view(['POST'])
+@permission_classes([AllowAny])
 def register_user(request):
     '''Handles the creation of a new user for authentication'''
 
@@ -67,7 +68,6 @@ def register_user(request):
                     is_group_rep=True,
                     is_isr=is_isr,
                     phone=phone
-                    # Add any additional fields related to GroupRep here
                 )
 
         except IntegrityError:

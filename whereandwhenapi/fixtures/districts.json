@@ -1,0 +1,90 @@
+[
+    {
+        "model": "whereandwhenapi.district",
+        "pk": 1,
+        "fields": {
+            "district_number": "9",
+            "rep_name": "Carol Carol"
+        }
+    },
+    {
+        "model": "whereandwhenapi.district",
+        "pk": 2,
+        "fields": {
+            "district_number": "10",
+            "rep_name": "Carol Carol"
+        }
+    },
+    {
+        "model": "whereandwhenapi.district",
+        "pk": 3,
+        "fields": {
+            "district_number": "11",
+            "rep_name": "Sue Sue"
+        }
+    },
+    {
+        "model": "whereandwhenapi.district",
+        "pk": 4,
+        "fields": {
+            "district_number": "12A",
+            "rep_name": "Ann Ann"
+        }
+    },
+    {
+        "model": "whereandwhenapi.district",
+        "pk": 5,
+        "fields": {
+            "district_number": "12B",
+            "rep_name": "Kay Kay"
+        }
+    },
+    {
+        "model": "whereandwhenapi.district",
+        "pk": 6,
+        "fields": {
+            "district_number": "12C",
+            "rep_name": "Marika Marika"
+        }
+    },
+    {
+        "model": "whereandwhenapi.district",
+        "pk": 7,
+        "fields": {
+            "district_number": "12D",
+            "rep_name": "Vacant"
+        }
+    },
+    {
+        "model": "whereandwhenapi.district",
+        "pk": 8,
+        "fields": {
+            "district_number": "12E",
+            "rep_name": "Patty Patty"
+        }
+    },
+    {
+        "model": "whereandwhenapi.district",
+        "pk": 9,
+        "fields": {
+            "district_number": "13",
+            "rep_name": "Janine Janine"
+        }
+    },
+    {
+        "model": "whereandwhenapi.district",
+        "pk": 10,
+        "fields": {
+            "district_number": "14",
+            "rep_name": "Deborah Deborah"
+        }
+    },
+    {
+        "model": "whereandwhenapi.district",
+        "pk": 11,
+        "fields": {
+            "district_number": "15",
+            "rep_name": "Shannon Shannon"
+        }
+    }
+]

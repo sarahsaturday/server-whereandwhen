@@ -1,0 +1,149 @@
+[
+    {
+        "model": "whereandwhenapi.meeting",
+        "pk": 1,
+        "fields": {
+            "wso_id": 30703331,
+            "district": "012C",
+            "area": 52,
+            "meeting_name": "East Nashville Courage To Change AFG",
+            "start_time": "10:00:00",
+            "street_address": "211 North 11th Street",
+            "city": "Nashville",
+            "zip": 37206,
+            "location_details": "Woodland Presbyterian Church",
+            "type": 2,
+            "zoom_login": null,
+            "zoom_pass": null,
+            "email": "encouragetochange@gmail.com",
+            "phone": null,
+            "last_updated": null
+        }
+    },
+    {
+        "model": "whereandwhenapi.meeting",
+        "pk": 2,
+        "fields": {
+            "wso_id": 32786,
+            "district": "0015",
+            "area": 52,
+            "meeting_name": "Monday Morning AFG",
+            "start_time": "11:00:00",
+            "street_address": "322 N Military Ave",
+            "city": "Lawrenceburg",
+            "zip": 38464,
+            "location_details": "Coleman United Methodist Church",
+            "type": 2,
+            "zoom_login": null,
+            "zoom_pass": null,
+            "email": "jdgough624@yahoo.com",
+            "phone": null,
+            "last_updated": null
+        }
+    },
+    {
+        "model": "whereandwhenapi.meeting",
+        "pk": 3,
+        "fields": {
+            "wso_id": 30667918,
+            "district": "0009",
+            "area": 52,
+            "meeting_name": "Livingston New Hope AFG",
+            "start_time": "11:00:00",
+            "street_address": "320 Oakley St",
+            "city": "Livingston",
+            "zip": 38570,
+            "location_details": "First Christian Church Of Livingston",
+            "type": 2,
+            "zoom_login": null,
+            "zoom_pass": null,
+            "email": null,
+            "phone": null,
+            "last_updated": null
+        }
+    },
+    {
+        "model": "whereandwhenapi.meeting",
+        "pk": 4,
+        "fields": {
+            "wso_id": 30807678,
+            "district": "012C",
+            "area": 52,
+            "meeting_name": "Circle of Serenity AFG",
+            "start_time": "12:00:00",
+            "street_address": "https://us02web.zoom.us/j/82128091778",
+            "city": "Gallatin",
+            "zip": 37066,
+            "location_details": "Zoom",
+            "type": 1,
+            "zoom_login": "821 2809 1778",
+            "zoom_pass": "977341",
+            "email": null,
+            "phone": null,
+            "last_updated": null
+        }
+    },
+    {
+        "model": "whereandwhenapi.meeting",
+        "pk": 5,
+        "fields": {
+            "wso_id": 67321,
+            "district": "012C",
+            "area": 52,
+            "meeting_name": "AFG Al-Anooners Group",
+            "start_time": "12:00:00",
+            "street_address": "704 Hartsville Pike",
+            "city": "Gallatin",
+            "zip": "37066-2525",
+            "location_details": "Church Of Our Savior",
+            "type": 2,
+            "zoom_login": null,
+            "zoom_pass": null,
+            "email": "alanoonersafg@gmail.com",
+            "phone": null,
+            "last_updated": null
+        }
+    },
+    {
+        "model": "whereandwhenapi.meeting",
+        "pk": 6,
+        "fields": {
+            "wso_id": 61292,
+            "district": "012C",
+            "area": 52,
+            "meeting_name": "Serenity At Noon AFG",
+            "start_time": "12:00:00",
+            "street_address": "102 Harris St",
+            "city": "Madison",
+            "zip": "37115-4024",
+            "location_details": "Serenity House",
+            "type": 2,
+            "zoom_login": null,
+            "zoom_pass": null,
+            "email": "serenityatnoonafg@gmail.com",
+            "phone": null,
+            "last_updated": null
+        }
+    },
+    {
+        "model": "whereandwhenapi.meeting",
+        "pk": 7,
+        "fields": {
+            "wso_id": 501115,
+            "district": "0018",
+            "area": 52,
+            "meeting_name": "Courage To Change AFG",
+            "start_time": "12:00:00",
+            "street_address": "1050 North Parkway",
+            "city": "Jackson",
+            "zip": 38301,
+            "location_details": "Aldersgate United Methodist Church",
+            "type": 2,
+            "zoom_login": null,
+            "zoom_pass": null,
+            "email": null,
+            "phone": null,
+            "last_updated": null
+        }
+    }
+]
