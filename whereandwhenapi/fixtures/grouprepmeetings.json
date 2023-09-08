@@ -1,0 +1,65 @@
+[
+    {
+        "model": "whereandwhenapi.grouprepmeeting",
+        "pk": 1,
+        "fields": {
+            "group_rep": 2,
+            "meeting": 1,
+            "is_home_group": true
+        }
+    },
+    {
+        "model": "whereandwhenapi.grouprepmeeting",
+        "pk": 2,
+        "fields": {
+            "group_rep": 1,
+            "meeting": 2,
+            "is_home_group": true
+        }
+    },
+    {
+        "model": "whereandwhenapi.grouprepmeeting",
+        "pk": 3,
+        "fields": {
+            "group_rep": 3,
+            "meeting": 3,
+            "is_home_group": false
+        }
+    },
+    {
+        "model": "whereandwhenapi.grouprepmeeting",
+        "pk": 4,
+        "fields": {
+            "group_rep": 4,
+            "meeting": 4,
+            "is_home_group": true
+        }
+    },
+    {
+        "model": "whereandwhenapi.grouprepmeeting",
+        "pk": 5,
+        "fields": {
+            "group_rep": 5,
+            "meeting": 5,
+            "is_home_group": true
+        }
+    },
+    {
+        "model": "whereandwhenapi.grouprepmeeting",
+        "pk": 6,
+        "fields": {
+            "group_rep": 6,
+            "meeting": 6,
+            "is_home_group": false
+        }
+    },
+    {
+        "model": "whereandwhenapi.grouprepmeeting",
+        "pk": 7,
+        "fields": {
+            "group_rep": 7,
+            "meeting": 7,
+            "is_home_group": true
+        }
+    }
+]
