@@ -2,6 +2,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from rest_framework import permissions
+from datetime import time
 from django.db.models import F, OuterRef, Subquery
 from django.db.models import Prefetch
 from whereandwhenapi.models import Meeting, MeetingDay
@@ -13,7 +14,7 @@ class HomepagePermission(permissions.BasePermission):
         if view.action in ['create', 'update', 'destroy']:
             # Allow create, update, and destroy for is_staff or is_group_rep
             return request.user.is_staff or request.user.is_group_rep
-        elif view.action in ['retrieve', 'list']:
+        elif view.action in ['retrieve', 'list', 'search']:
             # Allow retrieve and list for all users
             return True
         else:
@@ -104,6 +105,57 @@ class MeetingView(ViewSet):
         meeting.delete()
         
         return Response({}, status=status.HTTP_204_NO_CONTENT)
+    
+    def search(self, request):
+        """Handle GET requests to search meetings based on parameters"""
+        # Create an instance of the MeetingSearchSerializer with request.GET data
+        serializer = MeetingSearchSerializer(data=request.GET)
+
+        # Validate the serializer
+        if not serializer.is_valid():
+            return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+
+        # Extract validated search parameters from the serializer
+        validated_data = serializer.validated_data
+        day = validated_data.get('day')
+        meeting_name = validated_data.get('meeting_name')
+        meeting_type = validated_data.get('type')
+        zip_code = validated_data.get('zip')
+        city = validated_data.get('city')
+        start_time = validated_data.get('start_time')
+
+            # Use the search parameters to filter meetings
+        queryset = Meeting.objects.all()
+
+        if day:
+            queryset = queryset.filter(meetingday__day__day=day)
+
+        # if start_time:
+        #     try:
+        #         # Parse the time string into a Time object
+        #         parsed_time = time.fromisoformat(start_time)
+        #         queryset = queryset.filter(start_time=parsed_time)
+        #     except ValueError:
+        #         pass
+
+        if meeting_name:
+            queryset = queryset.filter(meeting_name__icontains=meeting_name)
+
+        if meeting_type:
+            queryset = queryset.filter(type=meeting_type)
+
+        if zip_code:
+            queryset = queryset.filter(zip=zip_code)
+
+        if city:
+            queryset = queryset.filter(city__icontains=city)
+
+        if start_time:
+            queryset = queryset.filter(start_time=start_time)
+
+        # Serialize the filtered meetings and return the response
+        serializer = MeetingSerializer(queryset, many=True, context={'request': request})
+        return Response(serializer.data)
 
 class MeetingSerializer(serializers.ModelSerializer):
     """JSON serializer for meetings"""
@@ -128,3 +180,11 @@ class MeetingSerializer(serializers.ModelSerializer):
             'phone',
             'last_updated'
         )
+
+class MeetingSearchSerializer(serializers.Serializer):
+    day = serializers.CharField(required=False)  
+    meeting_name = serializers.CharField(required=False)
+    type = serializers.CharField(required=False) 
+    zip = serializers.IntegerField(required=False)
+    city = serializers.CharField(required=False)
+    start_time = serializers.TimeField(required=False)
