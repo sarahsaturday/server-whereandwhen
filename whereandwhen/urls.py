@@ -9,6 +9,7 @@ router.register(r'meetings', MeetingView, 'meeting')
 
 urlpatterns = [
 path('', MeetingView.as_view({'get': 'list'}), name='meeting-list'),
+path('search/', MeetingView.as_view({'get': 'search'}), name='meeting-search'),
 path('register', register_user),
 path('login', login_user),
 path('admin/', admin.site.urls),
