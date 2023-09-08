@@ -55,8 +55,6 @@ REST_FRAMEWORK = {
     ],
 }
 
-CSRF_TRUSTED_ORIGINS = ["http://localhost:8000"]
-
 # THIS IS NEW
 CORS_ORIGIN_WHITELIST = (
     'http://localhost:3000',

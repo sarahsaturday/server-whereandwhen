@@ -1,0 +1,58 @@
+[
+    {
+        "model": "whereandwhenapi.meetingday",
+        "pk": 1,
+        "fields": {
+            "meeting": 1,
+            "day": 1
+        }
+    },
+    {
+        "model": "whereandwhenapi.meetingday",
+        "pk": 2,
+        "fields": {
+            "meeting": 2,
+            "day": 1
+        }
+    },
+    {
+        "model": "whereandwhenapi.meetingday",
+        "pk": 3,
+        "fields": {
+            "meeting": 3,
+            "day": 1
+        }
+    },
+    {
+        "model": "whereandwhenapi.meetingday",
+        "pk": 4,
+        "fields": {
+            "meeting": 4,
+            "day": 1
+        }
+    },
+    {
+        "model": "whereandwhenapi.meetingday",
+        "pk": 5,
+        "fields": {
+            "meeting": 5,
+            "day": 1
+        }
+    },
+    {
+        "model": "whereandwhenapi.meetingday",
+        "pk": 6,
+        "fields": {
+            "meeting": 6,
+            "day": 1
+        }
+    },
+    {
+        "model": "whereandwhenapi.meetingday",
+        "pk": 7,
+        "fields": {
+            "meeting": 7,
+            "day": 1
+        }
+    }
+]

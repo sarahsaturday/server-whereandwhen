@@ -1,0 +1,72 @@
+[
+    {
+        "model": "whereandwhenapi.grouprep",
+        "pk": 1,
+        "fields": {
+            "is_group_rep": true,
+            "is_isr": true,
+            "phone": "123-456-7890",
+            "user": 1
+        }
+    },
+    {
+        "model": "whereandwhenapi.grouprep",
+        "pk": 2,
+        "fields": {
+            "is_group_rep": true,
+            "is_isr": false,
+            "phone": "123-456-7890",
+            "user": 4
+        }
+    },
+    {
+        "model": "whereandwhenapi.grouprep",
+        "pk": 3,
+        "fields": {
+            "is_group_rep": true,
+            "is_isr": false,
+            "phone": "123-456-7890",
+            "user": 5
+        }
+    },
+    {
+        "model": "whereandwhenapi.grouprep",
+        "pk": 4,
+        "fields": {
+            "is_group_rep": true,
+            "is_isr": false,
+            "phone": "123-456-7890",
+            "user": 6
+        }
+    },
+    {
+        "model": "whereandwhenapi.grouprep",
+        "pk": 5,
+        "fields": {
+            "is_group_rep": true,
+            "is_isr": false,
+            "phone": "123-456-7890",
+            "user": 7
+        }
+    },
+    {
+        "model": "whereandwhenapi.grouprep",
+        "pk": 6,
+        "fields": {
+            "is_group_rep": true,
+            "is_isr": false,
+            "phone": "123-456-7890",
+            "user": 8
+        }
+    },
+    {
+        "model": "whereandwhenapi.grouprep",
+        "pk": 7,
+        "fields": {
+            "is_group_rep": true,
+            "is_isr": false,
+            "phone": "123-456-7890",
+            "user": 9
+        }
+    }
+]

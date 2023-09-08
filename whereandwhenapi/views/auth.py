@@ -27,7 +27,10 @@ def login_user(request):
         return Response(data)
     else:
         data = { 'valid': False }
-        return Response(data)
+        return Response(
+            {'message': 'Invalid email or password.'},
+            status=status.HTTP_401_UNAUTHORIZED
+        )
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
