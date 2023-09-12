@@ -142,5 +142,21 @@
             "date_joined": "2023-09-08T15:06:26.303366Z",
             "first_name": "Angie"
         }
+    },
+    {
+        "model": "auth.user",
+        "pk": 10,
+        "fields": {
+            "password": "pbkdf2_sha256$600000$BXw14tvl50VjvrGVAcqg3z$x8fwopoGIIhkiuHLfPL1ormPwF/0sAsI719k3F/WSW4=",
+            "last_login": null,
+            "is_superuser": false,
+            "username": "elsie@example.com",
+            "last_name": "Elsie",
+            "email": "elsie@example.com",
+            "is_staff": false,
+            "is_active": true,
+            "date_joined": "2023-09-11T19:48:50.051360",
+            "first_name": "Elsie"
+        }
     }
 ]

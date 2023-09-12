@@ -2,10 +2,11 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from rest_framework import permissions
+from django.shortcuts import get_object_or_404
 from datetime import time
 from django.db.models import F, OuterRef, Subquery
 from django.db.models import Prefetch
-from whereandwhenapi.models import Meeting, MeetingDay
+from whereandwhenapi.models import Meeting, MeetingDay, GroupRep, GroupRepMeeting, Day
 
 class HomepagePermission(permissions.BasePermission):
     """Homepage permissions"""
@@ -57,22 +58,44 @@ class MeetingView(ViewSet):
         Returns:
             Response -- JSON serialized meeting instance
         """
+
+        # Extract the list of day IDs and group rep IDs from the request data
+        day_ids = request.data.get("days", [])
+        group_rep_ids = request.data.get("group_reps", [])
+
+        # Remove 'days' and 'group_reps' from the request data
+        request_data = request.data.copy()
+        request_data.pop("days", None)
+        request_data.pop("group_reps", None)
+
         new_meeting = Meeting()
         new_meeting.wso_id = request.data["wso_id"]
-        new_meeting.district_id = request.data["districtId"]
-        new_meeting.area_id = request.data["areaId"]
-        new_meeting.meeting_name = request.data["name"]
+        new_meeting.district_id = request.data["district"]
+        new_meeting.area_id = request.data["area"]
+        new_meeting.meeting_name = request.data["meeting_name"]
         new_meeting.start_time = request.data["start_time"]
-        new_meeting.street_address = request.data["address"]
+        new_meeting.street_address = request.data["street_address"]
         new_meeting.city = request.data["city"]
         new_meeting.zip = request.data["zip"]
         new_meeting.location_details = request.data["location_details"]
-        new_meeting.type_id = request.data["typeId"]
+        new_meeting.type_id = request.data["type"]
         new_meeting.zoom_login = request.data.get("zoom_login")
         new_meeting.zoom_pass = request.data.get("zoom_pass")
         new_meeting.email = request.data.get("email")
         new_meeting.phone = request.data.get("phone")
         new_meeting.save()
+
+        # Add the days and group reps to the new meeting instance
+        new_meeting.days.set(day_ids)
+        
+        for group_rep_data in group_rep_ids:
+            group_rep_id = group_rep_data["id"]
+            is_home_group = group_rep_data.get("is_home_group", False)  # Default to False if not provided
+            GroupRepMeeting.objects.create(
+            group_rep_id=group_rep_id,
+            meeting=new_meeting,
+            is_home_group=is_home_group
+        )
 
         serializer = MeetingSerializer(new_meeting, context={'request': request})
 
@@ -81,20 +104,45 @@ class MeetingView(ViewSet):
     def update(self, request, pk=None):
         """Handle PUT requests for a meeting"""
         meeting = Meeting.objects.get(pk=pk)
+        request_data = request.data
+
         meeting.wso_id = request.data["wso_id"]
-        meeting.district_id = request.data["districtId"]
-        meeting.area_id = request.data["areaId"]
-        meeting.meeting_name = request.data["name"]
+        meeting.district_id = request.data["district"]
+        meeting.area_id = request.data["area"]
+        meeting.meeting_name = request.data["meeting_name"]
         meeting.start_time = request.data["start_time"]
-        meeting.street_address = request.data["address"]
+        meeting.street_address = request.data["street_address"]
         meeting.city = request.data["city"]
         meeting.zip = request.data["zip"]
         meeting.location_details = request.data["location_details"]
-        meeting.type_id = request.data["typeId"]
+        meeting.type_id = request.data["type"]
         meeting.zoom_login = request.data.get("zoom_login")
         meeting.zoom_pass = request.data.get("zoom_pass")
         meeting.email = request.data.get("email")
         meeting.phone = request.data.get("phone")
+
+        # Update associated days
+        if "days" in request_data:
+            meeting.days.clear()  # Remove existing associations
+            days = Day.objects.filter(pk__in=request_data["days"])
+            meeting.days.add(*days)
+
+        # Update associated group reps
+        if "group_reps" in request_data:
+            # Remove existing GroupRepMeeting associations for this meeting
+            GroupRepMeeting.objects.filter(meeting=meeting).delete()
+
+            # Add the new group rep associations with is_home_group information
+            group_reps_data = request_data["group_reps"]
+            for group_rep_data in group_reps_data:
+                group_rep_id = group_rep_data["id"]
+                is_home_group = group_rep_data.get("is_home_group", False)  # Default to False if not provided
+                GroupRepMeeting.objects.create(
+                    group_rep_id=group_rep_id,
+                    meeting=meeting,
+                    is_home_group=is_home_group
+                )
+
         meeting.save()
 
         return Response({}, status=status.HTTP_204_NO_CONTENT)
@@ -106,6 +154,18 @@ class MeetingView(ViewSet):
         
         return Response({}, status=status.HTTP_204_NO_CONTENT)
     
+    # def destroy_meeting_day(self, request, pk=None, meeting_day_id=None):
+    #     """
+    #     Custom action to delete a MeetingDay record associated with a Meeting.
+    #     """
+    #     # Ensure that the MeetingDay record exists and is associated with the specified Meeting
+    #     meeting_day = get_object_or_404(MeetingDay, pk=meeting_day_id, meeting__pk=pk)
+
+    #     # Now you can safely delete the MeetingDay record
+    #     meeting_day.delete()
+
+    #     return Response(status=status.HTTP_204_NO_CONTENT)
+
     def search(self, request):
         """Handle GET requests to search meetings based on parameters"""
         # Create an instance of the MeetingSearchSerializer with request.GET data
@@ -178,8 +238,20 @@ class MeetingSerializer(serializers.ModelSerializer):
             'zoom_pass',
             'email',
             'phone',
-            'last_updated'
+            'last_updated',
+            'days',
+            'group_reps'
         )
+
+class MeetingDaySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = MeetingDay
+        fields = '__all__'
+
+class GroupRepSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = GroupRep
+        fields = '__all__'
 
 class MeetingSearchSerializer(serializers.Serializer):
     day = serializers.CharField(required=False)  

@@ -68,5 +68,15 @@
             "phone": "123-456-7890",
             "user": 9
         }
+    },
+    {
+        "model": "whereandwhenapi.grouprep",
+        "pk": 8,
+        "fields": {
+            "is_group_rep": true,
+            "is_isr": true,
+            "phone": "123-456-7890",
+            "user": 10
+        }
     }
 ]

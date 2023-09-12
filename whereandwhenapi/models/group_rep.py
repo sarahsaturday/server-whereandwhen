@@ -12,7 +12,7 @@ from django.contrib.auth.models import User
 
 class GroupRep(models.Model):
     """GroupRep class"""
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE, related_name="group_rep")
     is_group_rep = models.BooleanField()
     is_isr = models.BooleanField()
     phone = models.CharField(max_length=200)

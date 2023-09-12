@@ -8,7 +8,7 @@ router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'meetings', MeetingView, 'meeting')
 
 urlpatterns = [
-path('', MeetingView.as_view({'get': 'list'}), name='meeting-list'),
+path('', include(router.urls)),
 path('search/', MeetingView.as_view({'get': 'search'}), name='meeting-search'),
 path('register', register_user),
 path('login', login_user),

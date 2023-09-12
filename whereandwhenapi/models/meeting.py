@@ -36,3 +36,5 @@ class Meeting(models.Model):
     email = models.CharField(max_length=200, null=True)
     phone = models.CharField(max_length=200,null=True)
     last_updated = models.DateTimeField(auto_now=True, null=True)
+    days = models.ManyToManyField("Day", through="MeetingDay", related_name="meetings")
+    group_reps = models.ManyToManyField("GroupRep", through="GroupRepMeeting", related_name="meetings")
