@@ -55,10 +55,22 @@ The project includes the following key features:
 
 ### Prerequisites
 
+## Prerequisites
+
+Before you start, ensure you have:
+
+- **Python**: Installed Python on your system. You can download it from [Python Downloads](https://www.python.org/downloads/).
+
+- **Django**: Installed Django, a Python web framework, using `pip install django`.
+
+- **Database**: Set up a database system (e.g., PostgreSQL, MySQL) and configure it as needed.
+
+That's it! You're ready to get started with the project.
+
 ### Installation
 
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/your-username/al-anon-meeting-directory.git
+   git clone https://github.com/sarahsaturday/server-whereandwhen.git
 
