@@ -2,10 +2,12 @@ from django.contrib import admin
 from django.conf.urls import include
 from django.urls import path
 from rest_framework import routers
-from whereandwhenapi.views import register_user, login_user, MeetingView
+from whereandwhenapi.views import register_user, login_user, MeetingView, DayView, TypeView
 
 router = routers.DefaultRouter(trailing_slash=False)
 router.register(r'meetings', MeetingView, 'meeting')
+router.register(r'days', DayView, 'day')
+router.register(r'types', TypeView, 'type')
 
 urlpatterns = [
 path('', include(router.urls)),

@@ -8,16 +8,15 @@ from django.db.models import F, OuterRef, Subquery
 from django.db.models import Prefetch
 from whereandwhenapi.models import Meeting, MeetingDay, GroupRep, GroupRepMeeting, Day
 
+
 class HomepagePermission(permissions.BasePermission):
     """Homepage permissions"""
 
     def has_permission(self, request, view):
-        if view.action in ['create', 'update', 'destroy']:
-            # Allow create, update, and destroy for is_staff or is_group_rep
-            return request.user.is_staff or request.user.is_group_rep
+        if request.user.is_authenticated:
+            return True  # Allow all actions for authenticated users
         elif view.action in ['retrieve', 'list', 'search']:
-            # Allow retrieve and list for all users
-            return True
+            return True  # Allow retrieve and list for anonymous users
         else:
             return False
 
@@ -41,10 +40,12 @@ class MeetingView(ViewSet):
             Response -- JSON serialized list of meetings
         """
         # Subquery to get the latest day for each meeting
-        latest_day_subquery = MeetingDay.objects.filter(meeting=OuterRef('pk')).order_by('-day').values('day')[:1]
+        latest_day_subquery = MeetingDay.objects.filter(
+            meeting=OuterRef('pk')).order_by('-day').values('day')[:1]
 
         # Annotate the Meeting queryset with the latest day
-        meetings = Meeting.objects.annotate(latest_day=Subquery(latest_day_subquery))
+        meetings = Meeting.objects.annotate(
+            latest_day=Subquery(latest_day_subquery))
 
         # Order by the latest_day and then start_time
         meetings = meetings.order_by('latest_day', 'start_time')
@@ -87,17 +88,19 @@ class MeetingView(ViewSet):
 
         # Add the days and group reps to the new meeting instance
         new_meeting.days.set(day_ids)
-        
+
         for group_rep_data in group_rep_ids:
             group_rep_id = group_rep_data["id"]
-            is_home_group = group_rep_data.get("is_home_group", False)  # Default to False if not provided
+            # Default to False if not provided
+            is_home_group = group_rep_data.get("is_home_group", False)
             GroupRepMeeting.objects.create(
-            group_rep_id=group_rep_id,
-            meeting=new_meeting,
-            is_home_group=is_home_group
-        )
+                group_rep_id=group_rep_id,
+                meeting=new_meeting,
+                is_home_group=is_home_group
+            )
 
-        serializer = MeetingSerializer(new_meeting, context={'request': request})
+        serializer = MeetingSerializer(
+            new_meeting, context={'request': request})
 
         return Response(serializer.data)
 
@@ -136,7 +139,8 @@ class MeetingView(ViewSet):
             group_reps_data = request_data["group_reps"]
             for group_rep_data in group_reps_data:
                 group_rep_id = group_rep_data["id"]
-                is_home_group = group_rep_data.get("is_home_group", False)  # Default to False if not provided
+                # Default to False if not provided
+                is_home_group = group_rep_data.get("is_home_group", False)
                 GroupRepMeeting.objects.create(
                     group_rep_id=group_rep_id,
                     meeting=meeting,
@@ -151,9 +155,9 @@ class MeetingView(ViewSet):
         """Handle DELETE requests for a meeting"""
         meeting = Meeting.objects.get(pk=pk)
         meeting.delete()
-        
+
         return Response({}, status=status.HTTP_204_NO_CONTENT)
-    
+
     # def destroy_meeting_day(self, request, pk=None, meeting_day_id=None):
     #     """
     #     Custom action to delete a MeetingDay record associated with a Meeting.
@@ -184,7 +188,7 @@ class MeetingView(ViewSet):
         city = validated_data.get('city')
         start_time = validated_data.get('start_time')
 
-            # Use the search parameters to filter meetings
+        # Use the search parameters to filter meetings
         queryset = Meeting.objects.all()
 
         if day:
@@ -214,8 +218,10 @@ class MeetingView(ViewSet):
             queryset = queryset.filter(start_time=start_time)
 
         # Serialize the filtered meetings and return the response
-        serializer = MeetingSerializer(queryset, many=True, context={'request': request})
+        serializer = MeetingSerializer(
+            queryset, many=True, context={'request': request})
         return Response(serializer.data)
+
 
 class MeetingSerializer(serializers.ModelSerializer):
     """JSON serializer for meetings"""
@@ -243,20 +249,23 @@ class MeetingSerializer(serializers.ModelSerializer):
             'group_reps'
         )
 
+
 class MeetingDaySerializer(serializers.ModelSerializer):
     class Meta:
         model = MeetingDay
         fields = '__all__'
+
 
 class GroupRepSerializer(serializers.ModelSerializer):
     class Meta:
         model = GroupRep
         fields = '__all__'
 
+
 class MeetingSearchSerializer(serializers.Serializer):
-    day = serializers.CharField(required=False)  
+    day = serializers.CharField(required=False)
     meeting_name = serializers.CharField(required=False)
-    type = serializers.CharField(required=False) 
+    type = serializers.CharField(required=False)
     zip = serializers.IntegerField(required=False)
     city = serializers.CharField(required=False)
     start_time = serializers.TimeField(required=False)
