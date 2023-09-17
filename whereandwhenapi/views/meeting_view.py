@@ -89,6 +89,12 @@ class MeetingView(ViewSet):
         # Add the days and group reps to the new meeting instance
         new_meeting.days.set(day_ids)
 
+        user = request.user 
+        GroupRepMeeting.objects.create(
+            group_rep=user,
+            meeting=new_meeting,
+            is_home_group=False  # Default to False
+        )
         for group_rep_data in group_rep_ids:
             group_rep_id = group_rep_data["id"]
             # Default to False if not provided
