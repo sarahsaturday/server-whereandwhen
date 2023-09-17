@@ -16,8 +16,6 @@ def login_user(request):
     email = request.data['email']
     password = request.data['password']
 
-    # Use the built-in authenticate method to verify
-    # authenticate returns the user object or None if no user is found
     authenticated_user = authenticate(username=email, password=password)
     print(authenticated_user)
     if authenticated_user is not None:
