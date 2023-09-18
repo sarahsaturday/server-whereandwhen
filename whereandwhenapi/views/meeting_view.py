@@ -2,6 +2,7 @@ from rest_framework.viewsets import ViewSet
 from rest_framework.response import Response
 from rest_framework import serializers, status
 from rest_framework import permissions
+from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from django.shortcuts import get_object_or_404
 from datetime import time
 from django.db.models import F, OuterRef, Subquery
@@ -13,9 +14,9 @@ class HomepagePermission(permissions.BasePermission):
     """Homepage permissions"""
 
     def has_permission(self, request, view):
-        if request.user.is_authenticated:
+        if view.action in ['retrieve', 'list', 'search']:
             return True  # Allow all actions for authenticated users
-        elif view.action in ['retrieve', 'list', 'search']:
+        elif request.user.is_authenticated:
             return True  # Allow retrieve and list for anonymous users
         else:
             return False
@@ -23,7 +24,7 @@ class HomepagePermission(permissions.BasePermission):
 class MeetingView(ViewSet):
     """Where and When Meetings"""
 
-    permission_classes = (HomepagePermission,)
+    permission_classes = (HomepagePermission, IsAuthenticatedOrReadOnly)
 
     def retrieve(self, request, pk=None):
         """Handle GET requests for single meeting
@@ -91,7 +92,7 @@ class MeetingView(ViewSet):
 
         user = request.user 
         GroupRepMeeting.objects.create(
-            group_rep=user,
+            group_rep=GroupRep.objects.get(user=user),
             meeting=new_meeting,
             is_home_group=False  # Default to False
         )
@@ -108,7 +109,7 @@ class MeetingView(ViewSet):
         serializer = MeetingSerializer(
             new_meeting, context={'request': request})
 
-        return Response(serializer.data)
+        return Response(serializer.data, status=status.HTTP_201_CREATED)
 
     def update(self, request, pk=None):
         """Handle PUT requests for a meeting"""
