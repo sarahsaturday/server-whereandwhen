@@ -90,21 +90,22 @@ class MeetingView(ViewSet):
         # Add the days and group reps to the new meeting instance
         new_meeting.days.set(day_ids)
 
-        user = request.user 
+        user = request.user
         GroupRepMeeting.objects.create(
             group_rep=GroupRep.objects.get(user=user),
             meeting=new_meeting,
             is_home_group=False  # Default to False
         )
         for group_rep_data in group_rep_ids:
-            group_rep_id = group_rep_data["id"]
-            # Default to False if not provided
-            is_home_group = group_rep_data.get("is_home_group", False)
-            GroupRepMeeting.objects.create(
-                group_rep_id=group_rep_id,
-                meeting=new_meeting,
-                is_home_group=is_home_group
-            )
+            if "id" in group_rep_data:
+                group_rep_id = group_rep_data["id"]
+                # Default to False if not provided
+                is_home_group = group_rep_data.get("is_home_group", False)
+                GroupRepMeeting.objects.create(
+                    group_rep_id=group_rep_id,
+                    meeting=new_meeting,
+                    is_home_group=is_home_group
+                )
 
         serializer = MeetingSerializer(
             new_meeting, context={'request': request})
