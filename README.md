@@ -1,76 +1,58 @@
-# AFG of Middle TN "Where & When" Meeting Directory
+# Where & When - Server-side README
 
-## Table of Contents
-- [Project Overview](#project-overview)
-- [Problem Statement](#problem-statement)
-- [Solution Overview](#solution-overview)
-- [Features](#features)
-- [Getting Started](#getting-started)
-  - [Prerequisites](#prerequisites)
-  - [Installation](#installation)
-- [Usage](#usage)
-- [Project Structure](#project-structure)
-- [Technologies Used](#technologies-used)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgments](#acknowledgments)
+## Project Description
 
-## Project Overview
+**Where & When** is the server-side component of a project developed for Al-Anon Family Services (AFS) of Middle Tennessee, a non-profit organization that maintains a directory of local support group meetings known as "Where & When." Currently, AFS manages this database manually using Google Sheets. Group representatives update their meeting details by filling out a Google Form, which is then manually transferred by the office manager from the responses Google Sheet to a private Google Sheet. This private Google Sheet is the source for a public Google Sheet listing meetings by day and time. Manual updates are required whenever new meetings are added or existing ones are removed. This process is cumbersome and time-consuming, often requiring Excel proficiency, posing challenges in hiring new office managers for the Board.
 
-The AFG of Middle TN "Where & When" Meeting Directory is a web application developed to streamline the management of local support group meetings for Al-Anon Family Groups (AFG) of Middle Tennessee. The project aims to replace the existing manual system of managing meeting data using Google Sheets with a more efficient and user-friendly database-driven solution.
+The objective is to replace AFS's current interconnected Google Docs system with a robust database solution. This involves migrating data from spreadsheets into a database and creating a user-friendly interface. The interface will enable group representatives to easily add, edit, update, and delete meeting details. Additionally, it will allow the office manager to manage meetings on behalf of group representatives. Site visitors will have a user-friendly way to search for meetings.
 
-## Problem Statement
+## Project Links
 
-AFG of Middle Tennessee currently manages their meeting directory manually through Google Sheets. The process involves group representatives filling out Google Forms, which are then manually processed by the office manager. This system is time-consuming and requires Excel proficiency, limiting the pool of potential office managers.
+- [ERD (Entity-Relationship Diagram)](https://dbdiagram.io/d/64f2483502bd1c4a5ed3c41a)
+- [Wireframe](https://sketchboard.me/HDY973P3tdLQ)
 
-## Solution Overview
+## Installation
 
-The AFG of Middle TN "Where & When" Meeting Directory project aims to address these challenges by:
-- Migrating data from Google Sheets to a database.
-- Creating a user-friendly web interface for group representatives to add, edit, update, and delete meeting details.
-- Allowing the office manager to manage meetings and users efficiently.
-- Providing visitors and users with an easy-to-navigate meeting directory.
+To set up the server-side of the application, you will need:
 
-## Features
+- Python
+- Django
 
-The project includes the following key features:
+Make sure you have Python installed on your machine. You can then install Django using pip:
 
-- Visitors and users can view meeting details in the meeting directory.
-- Visitors and users can search for meetings in the meeting directory.
-- Group representatives (users) can add new meetings to the directory.
-- Group representatives (users) can edit their meeting details.
-- Group representatives (users) can delete their meetings.
-- The office manager (staff) can edit any meeting's details.
-- The office manager (staff) can delete any meetings from the directory.
+```bash
+pip install django
 
-### Stretch Goals
+## Database Setup
 
-- The office manager (staff) can add meetings on behalf of group representatives.
-- The office manager (staff) can delete user profiles.
-- The office manager (staff) can edit user profiles.
-- Group representatives (users) can edit their own profiles.
-- Group representatives (users) can delete their own profiles.
+The application uses a local database. Please configure the database settings in your Django project's settings file.
 
-## Getting Started
+## API Documentation
 
-### Prerequisites
+The server provides data via JSON API endpoints. Here are some of the key endpoints:
 
-## Prerequisites
+- `/meetings`: Manages meeting data.
+- `/days`: Manages days of the week for meeting schedules.
+- `/types`: Manages meeting types.
+- `/groupreps`: Manages group representatives.
+- `/areas`: Manages meeting areas.
+- `/districts`: Manages meeting districts.
 
-Before you start, ensure you have:
+You can use these endpoints to interact with the data in the system.
 
-- **Python**: Installed Python on your system. You can download it from [Python Downloads](https://www.python.org/downloads/).
+## Configuration
 
-- **Django**: Installed Django, a Python web framework, using `pip install django`.
+Configuration details are not specified in this document. Configuration settings may vary depending on your deployment environment.
 
-- **Database**: Set up a database system (e.g., PostgreSQL, MySQL) and configure it as needed.
+## Usage
 
-That's it! You're ready to get started with the project.
+To start the server, you can use npm:
 
-### Installation
+```bash
+npm start
 
-1. Clone the repository:
+**Before Starting the Server:**
 
-   ```bash
-   git clone https://github.com/sarahsaturday/server-whereandwhen.git
+Make sure you have all the required dependencies installed and the database properly configured before starting the server.
 
+Thank you for using **Where & When**! If you have any questions or encounter issues, please don't hesitate to reach out.
